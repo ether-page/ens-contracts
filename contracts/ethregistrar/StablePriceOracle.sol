@@ -9,8 +9,21 @@ interface AggregatorInterface {
   function latestAnswer() external view returns (int256);
 }
 
+// Introducing native ETH pricing, moving away from USD fiat 
+// StablePriceOracle * is modified* to set a price in ETH not USD. USD/ETH oracle is not required.
+// Move price oracle functions to front end.
+// We introduce minimum changes in the code to avoid work and reduce conflicts
+// function setOracle is not required
+// We do not set a price for premium
+// function premium is required? 
+// function _premium is required?
+// function attoUSDToWei is required?
+// function weiToAttoUSD is required?
+// The LinearPremiumPriceOracle.sol is also not required
+// https://github.com/ensdomains/ens-contracts/blob/master/contracts/ethregistrar/LinearPremiumPriceOracle.sol
+// pricing structure in eth / length [0, 0, 3, 1, 0.1, 0.003]
 
-// StablePriceOracle sets a price in USD, based on an oracle.
+
 contract StablePriceOracle is Ownable, PriceOracle {
     using SafeMath for *;
     using StringUtils for *;
