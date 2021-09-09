@@ -41,8 +41,10 @@ contract StablePriceOracle is Ownable, PriceOracle {
         require(len > 0);
         
         uint basePrice = rentPrices[len - 1].mul(duration);
+        //In line 45 the premium is added to the basePrice. We don't need this, please delete this line.
         basePrice = basePrice.add(_premium(name, expires, duration));
 
+        //In line 48 we return the conversion from USD to ETH. We want to give ETH so please change this line to: return basePrice;
         return attoUSDToWei(basePrice);
     }
 
